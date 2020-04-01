@@ -1,0 +1,7 @@
+# Arquivos e diretórios do PyCharm e relacionados.
+.idea/
+**/__pycache__/
+
+# Imagens utilizadas no teste dos algoritmos de processamento de imagem.
+**/*.png
+**/*.jpg
