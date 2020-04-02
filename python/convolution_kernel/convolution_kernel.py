@@ -6,7 +6,15 @@ from typing import Callable, List, Optional, Sequence, Tuple
 
 # Classes # ---------------------------------------------------------------------------------------------------------- #
 class ConvolutionKernel:
-    # TODO - ConvolutionKernel: a docstring desta classe.
+    """Representa um kernel de convolução que pode ser aplicado a uma matriz de números reais.
+
+    Atributos
+    ---------
+    _matrix : List[List[float]]
+        Um valor que representa uma matriz de números reais, utilizada na aplicação do kernel em uma outra matriz.
+    _anchor : Tuple[int, int]
+        A posição do elemento na matriz que serve de âncora quando o kernel de convolução é aplicado.
+    """
     # Atributos # ---------------------------------------------------------------------------------------------------- #
     __slots__ = ["_matrix", "_anchor"]
     _matrix: List[List[float]]
@@ -170,10 +178,28 @@ class ConvolutionKernel:
         return self._matrix[index[0]][index[1]]
 
     def __setitem__(self, index: Tuple[int, int], value: float) -> None:
-        # TODO - ConvolutionKernel.__setitem__: a docstring deste operador.
+        """Atribui um valor, na posição passada, na matriz que representa o kernel de convolução.
+
+        Parâmetros
+        ----------
+        index : Tuple[int, int]
+            A posição na matriz do elemento ao qual se deseja atribuir o valor, no formato (x, y), onde x é o índice
+              da coluna e y é o índice da linha.
+
+            A indexação horizontal se inicia na esquerda, e a vertical no topo, ambos com índice 0 que cresce em 1 para
+              cada elemento. Logo, em uma matriz N x M, os índices horizontais vão de 0 a N - 1, e os verticais de 0 a
+              M - 1, e os índices passados como argumento devem respeitar esses limites [err #1].
+        value : float
+            O novo valor que se deseja atribuir ao elemento da matriz correspondente ao kernel de convolução.
+
+        Erros
+        -----
+        IndexError
+        [1] Caso o parâmetro 'index' represente uma posição fora das dimensões da matriz.
+        """
         # Verificar se a posição especificada está dentro dos limites permitidos.
         if not 0 <= index[0] < self.width or not 0 <= index[1] < self.height:
-            raise IndexError("[1]")
+            raise IndexError("[1] Parâmetro 'index' representa posição fora da matriz.")
 
         self._matrix[index[0]][index[1]] = value
 
